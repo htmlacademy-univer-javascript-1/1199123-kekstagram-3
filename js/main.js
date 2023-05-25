@@ -1,3 +1,2 @@
-import { createPhotoArray } from "./data.js";
+import { pictures } from "./drawPictures.js";
 
-const photos = createPhotoArray();
