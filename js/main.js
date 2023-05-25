@@ -20,5 +20,3 @@ function createPhotoArray() {
 
   return photoArray;
 }
-
-console.log(createPhotoArray())
