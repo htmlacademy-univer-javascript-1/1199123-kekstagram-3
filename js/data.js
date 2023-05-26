@@ -10,6 +10,7 @@ const EFFECTS = {
     filter: 'grayscale',
     min: 0,
     max: 1,
+    start: 1,
     size: ''
   },
   sepia: {
@@ -18,6 +19,7 @@ const EFFECTS = {
     filter: 'sepia',
     min: 0,
     max: 1,
+    start: 1,
     size: ''
   },
   marvin: {
@@ -26,6 +28,7 @@ const EFFECTS = {
     filter: 'invert',
     min: 0,
     max: 100,
+    start: 100,
     size: '%'
   },
   phobos: {
@@ -34,6 +37,7 @@ const EFFECTS = {
     filter: 'blur',
     min: 0,
     max: 3,
+    start: 3,
     size: 'px'
   },
   heat: {
@@ -42,6 +46,7 @@ const EFFECTS = {
     filter: 'brightness',
     min: 1,
     max: 3,
+    start: 3,
     size: ''
   }
 };
