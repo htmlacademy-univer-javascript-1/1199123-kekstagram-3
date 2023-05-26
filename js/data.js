@@ -15,10 +15,6 @@ function createPhotoArray() {
   return photoArray;
 }
 
-export { createPhotoArray }
-
-export { createPhotoArray };
-
 const EFFECTS = {
   none: {
     name: 'none',
@@ -68,3 +64,4 @@ const EFFECTS = {
 };
 
 export { EFFECTS };
+export { createPhotoArray };

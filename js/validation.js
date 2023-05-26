@@ -1,4 +1,4 @@
-import pristineMin from "../pristine/pristine.min.js";
+import { sendData } from "./server.js";
 
 const form = document.querySelector('.img-upload__form');
 const regex = new RegExp('^#[а-яa-zA-ZА-ЯёЁ0-9]{1,15}$');
@@ -17,13 +17,13 @@ function validateComment (value) {
 }
 
 function validateHashtag (value) {
-  return value.length >= 16 && regex.test(value);
+  return value.length >= 2 && regex.test(value);
 }
 
 pristine.addValidator(
   form.querySelector('.text__description'),
   validateComment,
-  'Комментарий должен содержать от 20 до 140 символов'
+  'Комментарий должен содержать от 20 до 140 символов',
 );
 
 pristine.addValidator(
@@ -34,8 +34,13 @@ pristine.addValidator(
 
 form.addEventListener('submit', (evt) => {
   evt.preventDefault();
-  if (pristine.validate()) {
-    closeWindow();
-    showSuccessMessage();
+  if(!pristine.validate()) {
+    return;
   }
+  evt.target.querySelector('.img-upload__submit').disabled = true;
+  sendData( () => {
+    evt.target.querySelector('.img-upload__submit').disabled = false;
+  },
+  new FormData(evt.target)
+  );
 });
