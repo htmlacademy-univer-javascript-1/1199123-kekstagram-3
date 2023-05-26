@@ -1,4 +1,4 @@
-const fileInput = document.querySelector('#upload-file');
+/* const fileInput = document.querySelector('#upload-file');
 const editForm = document.querySelector('.img-upload__overlay');
 const closeButton = editForm.querySelector('#upload-cancel');
 
@@ -26,4 +26,4 @@ document.addEventListener('keydown', (evt) => {
   if (!editForm.classList.contains('hidden') && evt.key === 'Escape') {
     hideEditForm();
   }
-})
+}) */

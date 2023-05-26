@@ -12,7 +12,7 @@ const getData = () => {
   };
 };
 
-export function openImgUpload() {
+function openImgUpload() {
   const data = getData();
   data.fileInput.removeEventListener('change', openImgUpload);
   data.imgUpload.classList.remove('hidden');
@@ -22,7 +22,7 @@ export function openImgUpload() {
   img.src = window.URL.createObjectURL(data.fileInput.files[0]);
 };
 
-export function closeImgUpload() {
+function closeImgUpload() {
   const data = getData();
   data.imgUpload.classList.add('hidden');
   document.body.classList.remove('modal-open');
@@ -34,8 +34,8 @@ export function closeImgUpload() {
   data.submitButton.disabled = false;
 };
 
-export function escapeKeyHandler(evt) {
-  if(evt.key === 'Escape'){
+function escapeKeyHandler(evt) {
+  if (evt.key === 'Escape') {
     closeImgUpload();
   }
 }
@@ -44,7 +44,7 @@ const dataFirst = getData();
 dataFirst.fileInput.addEventListener('change', openImgUpload);
 dataFirst.closeImgUploadButton.addEventListener('click', closeImgUpload);
 
-export function closeImgUploadWithError() {
+function closeImgUploadWithError() {
   const data = getData();
   data.imgUpload.classList.add('hidden');
   document.body.classList.remove('modal-open');
@@ -53,3 +53,5 @@ export function closeImgUploadWithError() {
   data.fileInput.addEventListener('change', openImgUpload);
   data.submitButton.disabled = false;
 };
+
+export { openImgUpload, closeImgUpload, escapeKeyHandler, closeImgUploadWithError }

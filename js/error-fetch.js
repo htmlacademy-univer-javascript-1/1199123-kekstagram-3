@@ -3,12 +3,7 @@ const getData = () => {
   const body = document.querySelector('body');
   const errorButton = error.querySelector('.error_fetch__button');
   const errorElement = document.querySelector('.error_fetch');
-  return {
-    errorButton,
-    body,
-    error,
-    errorElement
-  };
+  return { errorButton, body, error, errorElement };
 };
 
 

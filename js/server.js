@@ -4,7 +4,7 @@ import { showError } from "./error.js";
 
 const SERVER_URL = 'https://27.javascript.pages.academy/kekstagram-simple';
 
-export const fetchData = (onSuccess) => {
+const fetchData = (onSuccess) => {
   fetch(`${SERVER_URL}/data`)
     .then((response) => {
       if (response.ok) {
@@ -18,7 +18,7 @@ export const fetchData = (onSuccess) => {
     });
 };
 
-export const sendData = (onSuccess, body) => {
+const sendData = (onSuccess, body) => {
   fetch(`${SERVER_URL}`, {
     method: 'POST',
     body,
@@ -37,3 +37,5 @@ export const sendData = (onSuccess, body) => {
       showError();
     });
 };
+
+export { fetchData, sendData }

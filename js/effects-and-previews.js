@@ -6,78 +6,19 @@ const MIN_SCALE = 25;
 const DEFAULT_SCALE = 100;
 
 const imgUpload = document.querySelector('.img-upload');
-const imgPreview = imgUpload.querySelector('.img-upload__preview img');
+const imgPreview = imgUpload.querySelector('.img-upload__preview-external img');
 const scaleControlValue = imgUpload.querySelector('.scale__control--value');
 const scaleControlSmaller = imgUpload.querySelector('.scale__control--smaller');
 const scaleControlBigger = imgUpload.querySelector('.scale__control--bigger');
-const effectsList = imgUpload.querySelector('.effects__list');
-const effectsPreview = imgUpload.querySelector('.img-upload__preview');
 
-
+// Scaling controls
 let currentScale = DEFAULT_SCALE;
 
-// Effects updates
-const effectsClasses = {
-  'none': '',
-  'chrome': 'effects__preview--chrome',
-  'sepia': 'effects__preview--sepia',
-  'marvin': 'effects__preview--marvin',
-  'phobos': 'effects__preview--phobos',
-  'heat': 'effects__preview--heat',
-};
-
-let prevFilter = null;
-
-function updateEffect(currentFilter) {
-  effectsPreview.className = 'img-upload__preview';
-  if (currentFilter !== 'none') {
-    effectsPreview.classList.add(effectsClasses[currentFilter]);
-    prevFilter = effectsClasses[currentFilter];
-    slider.classList.remove('hidden');
-    slider.noUiSlider.updateOptions({
-      range: {
-        min: EFFECTS[currentFilter].min,
-        max: EFFECTS[currentFilter].max,
-      },
-      start: EFFECTS[currentFilter].start,
-      step: EFFECTS[currentFilter].step,
-    });
-    slider.noUiSlider.on('update', () => {
-      const currentValue = slider.noUiSlider.get();
-      effectsPreview.style.filter = `${EFFECTS[currentFilter].filter}(${currentValue}${EFFECTS[currentFilter].size})`;
-    });
-  } else {
-    slider.classList.add('hidden');
-    effectsPreview.style.filter = '';
-  }
-};
-
-
-// Slider
-const slider = document.querySelector('.effect-level__slider');
-noUiSlider.create(slider, {
-  range: {
-    min: 0,
-    max: 100,
-  },
-  start: 80,
-  step: 1,
-  connect: 'lower',
-});
-slider.classList.add('hidden');
-
-function clearSlider() {
-  effectsPreview.className = 'img-upload__preview';
-  slider.classList.add('hidden');
-  effectsPreview.style.filter = '';
-}
-
-// Scale updates
 function updateScale(scale) {
   currentScale = scale;
   imgPreview.style.transform = `scale(${currentScale / 100})`;
   scaleControlValue.value = `${currentScale}%`;
-}
+};
 
 scaleControlSmaller.addEventListener('click', () => {
   if (currentScale > MIN_SCALE) {
@@ -100,11 +41,67 @@ scaleControlValue.addEventListener('change', () => {
   }
 });
 
-effectsList.addEventListener('change', (evt) => {
-  const filter = evt.target.value;
-  effectsPreview.classList.remove(prevFilter);
+// Slider controls
+const slider = document.querySelector('.effect-level__slider');
+noUiSlider.create(slider, {
+  range: {
+    min: 0,
+    max: 100,
+  },
+  start: 80,
+  step: 1,
+  connect: 'lower',
+});
+slider.classList.add('hidden');
+
+function clearSlider() {
+  effectsPreview.className = '';
+  slider.classList.add('hidden');
+  effectsPreview.style.filter = '';
+};
+
+// Effects controls
+const effectsPreview = document.querySelector('.img-upload__preview > img');
+const effectsClasses = {
+  'chrome': 'effects__preview--chrome',
+  'sepia': 'effects__preview--sepia',
+  'marvin': 'effects__preview--marvin',
+  'phobos': 'effects__preview--phobos',
+  'heat': 'effects__preview--heat',
+};
+
+
+let lastFilter = null;
+
+const updateEffect = (currentFilter) => {
+  if (currentFilter !== 'none') {
+    effectsPreview.classList.add(effectsClasses[currentFilter]);
+    lastFilter = effectsClasses[currentFilter];
+    slider.classList.remove('hidden');
+    slider.noUiSlider.updateOptions({
+      range: {
+        min: EFFECTS[currentFilter].min,
+        max: EFFECTS[currentFilter].max,
+      },
+      start: EFFECTS[currentFilter].start,
+      step: EFFECTS[currentFilter].step,
+    });
+    slider.noUiSlider.on('update', () => {
+      const currentValue = slider.noUiSlider.get();
+      effectsPreview.style.filter = `${EFFECTS[currentFilter].filter}(${currentValue}${EFFECTS[currentFilter].size})`;
+    });
+  } else {
+    slider.classList.add('hidden');
+    effectsPreview.style.filter = '';
+  }
+};
+
+const effectsList = document.querySelector('.effects__list');
+effectsList.addEventListener('change', (event) => {
+  const filter = event.target.value;
+  effectsPreview.classList.remove(lastFilter);
   updateEffect(filter);
 });
 
-export { clearSlider };
-export { updateEffect };
+
+export { updateScale, clearSlider }

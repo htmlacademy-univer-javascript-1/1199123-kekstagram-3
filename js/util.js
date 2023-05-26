@@ -1,4 +1,4 @@
-function showAlert(message) {
+/* function showAlert(message) {
   const alertContainer = document.createElement('div');
   alertContainer.style.zIndex = '100';
   alertContainer.style.position = 'absolute';
@@ -30,3 +30,4 @@ const checkStrLength = (str, maxLen) => str.length <= maxLen
 
 export { showAlert }
 export { getRandomInt, checkStrLength }
+*/

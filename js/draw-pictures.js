@@ -1,7 +1,6 @@
 import { fetchData } from "./server.js";
 
 const picMiniature = (photos) => {
-  const photos = createPhotoArray();
   const pictureTemplate = document.querySelector('#picture').content;
   const pictures = document.querySelector('.pictures');
   const documentFragment = new DocumentFragment();
@@ -20,6 +19,5 @@ const picMiniature = (photos) => {
 
   pictures.append(documentFragment);
 };
-
 
 fetchData(picMiniature);
